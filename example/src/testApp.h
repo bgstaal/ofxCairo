@@ -18,7 +18,6 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-	    ofPoint calculateNextPoint();
     
 	private:
 	    ofPoint _center;
@@ -27,7 +26,6 @@ class testApp : public ofBaseApp{
 	    ofPoint _prevPoint;
 	    bool _useCairo;
     
-	    int _numSegments;
-    
 	    void _addNewPath();
+    	ofPoint _calculateNextPoint();
 };

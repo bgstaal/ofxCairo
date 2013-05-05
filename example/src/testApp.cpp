@@ -8,12 +8,12 @@ void testApp::setup()
     _useCairo = false;
     _center = ofPoint(ofGetWidth()/2.0f, ofGetHeight()/2.0f);
     _addNewPath();
-    _paths[_paths.size()-1].moveTo(calculateNextPoint());
+    _paths[_paths.size()-1].moveTo(_calculateNextPoint());
     
     _cairo.setLineCap(CAIRO_LINE_CAP_ROUND);
 }
 
-ofPoint testApp::calculateNextPoint()
+ofPoint testApp::_calculateNextPoint()
 {
     float t = ofGetElapsedTimef();
     ofPoint p = _center;
@@ -49,7 +49,7 @@ void testApp::update()
 {
     float t = ofGetElapsedTimef();
     
-    ofPoint p = calculateNextPoint();
+    ofPoint p = _calculateNextPoint();
     
     if (ofRandom(1.0f) > .96f)
     {
