@@ -15,9 +15,10 @@ void testApp::setup()
 
 ofPoint testApp::_calculateNextPoint()
 {
+    float s = ofGetHeight()/2;
     float t = ofGetElapsedTimef();
     ofPoint p = _center;
-    p += ofPoint(cos(t)*(sin(t*(cos(t)/PI))*500.0f), sin(t)*(cos(t*(sin(t)/PI))*500.0f));
+    p += ofPoint(cos(t)*(sin(t*(cos(t)/PI))*s), sin(t)*(cos(t*(sin(t)/PI))*s));
     
     return p;
 }
@@ -53,6 +54,7 @@ void testApp::update()
     
     if (ofRandom(1.0f) > .96f)
     {
+        _paths[_paths.size()-1].simplify();
         _addNewPath();
         _paths[_paths.size()-1].moveTo(p);
     }
@@ -62,6 +64,20 @@ void testApp::update()
     }
     
     if (_paths.size() > 20) _paths.erase(_paths.begin());
+    
+    int numCommands = 0;
+    
+    for (int i = 0, s = _paths.size(); i < s; i++)
+    {
+        int num = _paths[i].getSubPaths().size();
+        
+        for (int j = 0; j < num; j++)
+        {
+            numCommands += _paths[i].getSubPaths()[j].getCommands().size();
+        }
+    }
+    
+    cout << "num commands: " << numCommands << endl;
 }
 
 //--------------------------------------------------------------
